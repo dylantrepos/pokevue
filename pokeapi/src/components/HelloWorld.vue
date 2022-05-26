@@ -1,6 +1,13 @@
 <template>
   <h1>{{ pokemon?.name }}</h1>
-  <img :src="pokemon?.sprites?.front_default" alt="">
+  <div @mouseover="pokemonImage = pokemon?.sprites?.back_default" @mouseleave="pokemonImage = pokemon?.sprites?.front_default">
+    <img 
+    :src="pokemonImage" 
+    alt="" 
+    class="img-result"
+    
+    >
+  </div>
   <div class="box-searchPokemon">
     <form @submit.prevent="callPokemon">
       <input v-model="pokemonName">
@@ -20,7 +27,7 @@
   <div  class="box-evolution">
     <ul id="groupPokemonsEvolution">
     <li v-for="pokemon of pokemonsEvolution">
-      <div>
+      <div @click="switchPokemon(pokemon?.name)">
         <img :src="pokemon?.sprites?.front_default" alt="">
         <p>{{ pokemon.name }}</p>
       </div>
@@ -41,6 +48,7 @@
         pokemonName: 'pikachu',
         pokemonsEvolution: [],
         listPokeNames: [],
+        pokemonImage: null,
         error: false,
       }
     },
@@ -52,6 +60,7 @@
           this.error = false;
           if(this.pokemon?.name !== this.pokemonName){  
             this.pokemon = await fetch(`${this.url}/${this.pokemonName}`).then((data) => data.json())
+            this.pokemonImage = this.pokemon.sprites.front_default
             const link = this.pokemon.species.url;
             this.pokemonEvolutionLink = await fetch(link).then((data) => (data.json()))
             this.pokemonEvolutionData = await fetch(this.pokemonEvolutionLink.evolution_chain.url).then((data) => (data.json()))
@@ -85,7 +94,11 @@
         const myArr = this.listPokeNames
         console.log('ici : ', this.listPokeNames[0])
         this.pokemonName = this.listPokeNames[randomR].name
-      } 
+      },
+      switchPokemon(newPokemon) {
+        this.pokemonName = newPokemon;
+        this.callPokemon();
+      }
     },
     mounted() {
       this.callPokemon();
