@@ -26,13 +26,14 @@
   <p v-if="error">Sorry, this pokemon doesn't exists.</p>
   <div  class="box-evolution">
     <ul id="groupPokemonsEvolution">
-    <li v-for="pokemon of pokemonsEvolution">
-      <div @click="switchPokemon(pokemon?.name)">
-        <img :src="pokemon?.sprites?.front_default" alt="">
-        <p>{{ pokemon.name }}</p>
-      </div>
+      <li v-for="pokemon of pokemonsEvolution">
+        <div @click="switchPokemon(pokemon?.name)">
+          <img :src="pokemon?.sprites?.front_default" alt="">
+          <p>{{ pokemon.name }}</p>
+        </div>
       </li>
-  </ul>
+     <p v-show="pokemonsEvolution.length < 1">No evolution for this pokemon.</p>
+     </ul>
   </div>
 </template>
 
@@ -65,6 +66,7 @@
             this.pokemonEvolutionLink = await fetch(link).then((data) => (data.json()))
             this.pokemonEvolutionData = await fetch(this.pokemonEvolutionLink.evolution_chain.url).then((data) => (data.json()))
             let path = this.pokemonEvolutionData.chain;
+            console.log(this.pokemonEvolutionData)
             this.pokemonsEvolution = [];
             this.pokemonsEvolution.push(fetch(`${this.url}/${path.species.name}`).then((data) => data.json()))
 
@@ -107,7 +109,6 @@
           let list = [];
           let data = await fetch(`${this.url}/?offset=20&limit=1126`).then((data) => data.json())
           this.listPokeNames = data.results;
-          console.log(listPokeNames)
       }
       test()
     },
