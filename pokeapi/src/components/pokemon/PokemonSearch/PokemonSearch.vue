@@ -1,9 +1,8 @@
 <template>
-  <div class="box-searchPokemon">
-    <form @submit.prevent="callPokemon">
+    <form @submit.prevent="callPokemon" class="box-searchPokemon">
       <input v-model="pokemonName">
       <div class="box-button-searchbox">
-        <button>
+        <button type="submit">
           <img src="../../../assets/pokeball.svg" alt="">
           <p>SEARCH</p>
         </button>
@@ -13,37 +12,27 @@
         </button>
       </div>
     </form>
-  </div>
 </template>
 
 <script>
   export default {
-      props: ['pokemonName'],
+    props: ['url'],
     data() {
       return {
         url: 'https://pokeapi.co/api/v2/pokemon',
-        pokemon: null,
         pokemonName: 'pikachu',
         listPokeNames: [],
         error: false,
       }
     },
-    computed: {
-    },
     methods: {
       async callPokemon() {
-        try {
-          this.error = false;
-          if(this.pokemon?.name !== this.pokemonName){  
-            this.pokemon = await fetch(`${this.url}/${this.pokemonName}`).then((data) => data.json());
-          }
-        } catch(error) {
-          this.error = true;
-        }
+          this.$emit('change-pokemon', this.pokemonName);
       },
       generatePokemon() {
         const randomR = Math.floor(Math.random() * (0 - 1126 + 1) + 1126);
-        this.pokemonName = this.listPokeNames[randomR]?.name
+        this.pokemonName = this.listPokeNames[randomR]?.name;
+        this.callPokemon();
       },
     },
     async mounted() {
@@ -55,4 +44,5 @@
 </script>
 
 <style scoped lang="scss">
+@import './PokemonSearch.scss';
 </style>

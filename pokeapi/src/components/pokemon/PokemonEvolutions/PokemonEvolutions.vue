@@ -3,7 +3,7 @@
      <div class="box_evo-images-all">
         <PokemonEvolutionImage
             v-for="pokemon of pokemonEvolutions" :pokemon="pokemon" 
-            @click="$emit('newName', pokemon?.name)" 
+            @click="$emit('change-pokemon', pokemon?.name)" 
         />
      </div>
      <p v-show="pokemonEvolutions.length < 1">No evolution for this pokemon.</p>
