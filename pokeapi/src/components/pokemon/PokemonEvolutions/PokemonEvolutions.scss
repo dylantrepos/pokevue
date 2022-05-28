@@ -1,0 +1,21 @@
+.box_evo {
+    width: 100%;
+    padding: 0;
+    padding: 0 2em;
+
+    &-images-all {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-gap: 25px;
+        justify-items: center;
+    }
+}
+
+@keyframes appearsEvolution {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
