@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div class="aside">
-      <div class="left-bloc-top"></div>
+      <div class="left-bloc-top">
+        <div class="circle-left"></div>
+        <div class="circle circle-red"></div>
+        <div class="circle circle-yellow"></div>
+        <div class="circle circle-green"></div>
+      </div>
       <div class="left-bloc-bottom">
         <div class="left-layout-3"></div>
         <div class="left-layout-2"></div>

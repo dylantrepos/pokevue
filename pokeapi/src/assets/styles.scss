@@ -72,3 +72,50 @@
     height: 100%;
     clip-path: polygon(2% 98.5%, 98% 98.5%, 98% 11.4%, 66% 11.32%, 54% 21.3%, 2% 21.3%)
 }
+
+.left-bloc-top{
+    position: relative;
+}
+
+.circle-left {
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 100px;
+    border: black solid 2px;
+}
+
+.circle-left::before {
+    content: '';
+    width: 65px;
+    height: 65px;
+    background-color: #28ABFD;
+    position: absolute;
+    top: 3.5px;
+    left: 3.5px;
+    border-radius: 100px;
+    border: black solid 2px;
+}
+.circle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #DE0A2C;
+    border-radius: 100px;
+    border: black solid 2px;
+    left: 110px;
+    top: 10px;
+}
+
+.circle-yellow {
+    background-color: #F5DA2D;
+    left: 140px;
+}
+
+.circle-green {
+    background-color: #4FAE5D;
+    left: 170px;
+}
