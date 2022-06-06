@@ -1,19 +1,10 @@
 <template>
-  <div class="container">
-    <div class="aside">
-      <div class="left-bloc-top"></div>
-      <div class="left-bloc-bottom">
-        <div class="left-layout-3"></div>
-        <div class="left-layout-2"></div>
-        <div class="left-layout-1"></div>
-      </div>
-      
-    </div>
-    <div class="aside">
-  <!-- Content -->
-    </div>
-  </div>
-  
+  <h1 class="pokemon-name">{{ pokemon?.name }}</h1>
+  <h5>Type : {{this.pokemon?.types[0].type.name}}</h5>
+  <PokemonImage :pokemon="pokemon" />
+  <PokemonSearch :pokemon="pokemon" @change-pokemon="callPokemon"/>
+  <p v-if="error">Sorry, this pokemon doesn't exists.</p>
+  <PokemonEvolutions :pokemon="pokemon" @change-pokemon="callPokemon" :url="url" />
 </template>
 
 <script>
@@ -49,5 +40,4 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
 </script>
 
 <style scoped lang="scss">
-
 </style>
