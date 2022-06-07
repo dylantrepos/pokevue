@@ -1,21 +1,62 @@
 <template>
   <div class="container">
-    <div class="aside">
+    <div class="aside -left">
       <div class="left-bloc-top">
-        <div class="circle-left"></div>
+        <div class="circle-left">
+          <div class="circle-left-inside"></div>
+        </div>
         <div class="circle circle-red"></div>
         <div class="circle circle-yellow"></div>
         <div class="circle circle-green"></div>
       </div>
+      <div class="left-layout-4"></div>
+      <div class="left-layout-3"></div>
+      <div class="left-layout-2"></div>
+      <div class="left-layout-1"></div>
       <div class="left-bloc-bottom">
-        <div class="left-layout-3"></div>
-        <div class="left-layout-2"></div>
-        <div class="left-layout-1"></div>
+        <div class="left-layout-elements">
+            <div class="screen-layout">
+              <div class="screen-element">
+                <div class="top-element">
+                  <div class="red-light-top"></div>
+                  <div class="red-light-top"></div>
+                </div>
+                <div class="middle-element"></div>
+                <div class="bottom-element">
+                  <div class="red-light-bottom"></div>
+                  <div class="lines-layout-bottom">
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="control-layout">
+              <div class="control-top-layout">
+                  <div class="round-black"></div>
+                  <button class="buttons-elements btn-search">SEARCH</button>
+                  <button class="buttons-elements btn-random">RANDOM</button>
+              </div>
+            </div>
+        </div>
+        <div class="left-pivot"></div>
       </div>
       
     </div>
-    <div class="aside">
-  <!-- Content -->
+    <div class="aside -right">
+      <div class="right-bloc">
+        <div class="right-layout-3"></div>
+        <div class="right-layout-2"></div>
+        <div class="right-layout-1"></div>
+      </div>
     </div>
   </div>
   

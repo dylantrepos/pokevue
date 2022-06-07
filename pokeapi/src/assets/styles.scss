@@ -27,11 +27,20 @@
 }
 
 .container {
-    background-color: blue;
-    height: 90%;
-    width: 80%;
-    max-width: 850px;
+    background-color: rgb(255, 255, 255);
+    max-width: 1150px;
+    width: 120vh;
+    height: 90vh;
+    max-height: 800px;
     display: flex;
+    margin: 0 20px;
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        height: 80vw;
+        width: 90%;
+    }
 }
 
 .aside {
@@ -39,13 +48,23 @@
     background-color: #DC092C;
     border-radius: 10px;
     border: black 2px solid;
+    overflow: hidden;
 }
 
-.left-bloc-bottom {
+.-left {
+    position: relative;
+}
+
+/*
+* Left SIDE
+*/
+
+
+.left-layout-4 {
     background-color: black;
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
     clip-path: polygon(0% 100%, 100% 100%, 100% 10%, 65% 10%, 53% 20%, 0% 20%);
 }
 
@@ -66,56 +85,249 @@
 }
 
 .left-layout-1 {
-    background-color: #DC092C;
+    background-color: #c70828;
     position: absolute;
     width: 100%;
     height: 100%;
     clip-path: polygon(2% 98.5%, 98% 98.5%, 98% 11.4%, 66% 11.32%, 54% 21.3%, 2% 21.3%)
 }
 
-.left-bloc-top{
-    position: relative;
+.left-bloc-top {
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    padding-left: 1vw;
+    z-index: 3;
 }
 
 .circle-left {
-    width: 80px;
-    height: 80px;
+    height: 70%;
+    aspect-ratio: 1 / 1;
     background-color: #fff;
-    position: absolute;
-    top: 20px;
-    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 100px;
     border: black solid 2px;
 }
 
-.circle-left::before {
-    content: '';
-    width: 65px;
-    height: 65px;
+.circle-left-inside {
+    width: 90%;
+    height: 90%;
     background-color: #28ABFD;
-    position: absolute;
-    top: 3.5px;
-    left: 3.5px;
     border-radius: 100px;
     border: black solid 2px;
 }
 .circle {
-    position: absolute;
-    width: 20px;
-    height: 20px;
+    // position: absolute;
+    height: 15%;
+    aspect-ratio: 1 / 1;
     background-color: #DE0A2C;
     border-radius: 100px;
     border: black solid 2px;
-    left: 110px;
-    top: 10px;
+    margin-bottom: 20%;
+    margin-left: 2%;
 }
 
 .circle-yellow {
     background-color: #F5DA2D;
-    left: 140px;
 }
 
 .circle-green {
     background-color: #4FAE5D;
-    left: 170px;
+}
+
+.left-pivot {
+    position: absolute;
+    background-color: #89051B;
+    border: black solid 2px;
+    border-right: 0px;
+    height: 114%;
+    width: 10%;
+    right: 0;
+    bottom: 0;
+}
+
+// Screen part
+
+.left-bloc-bottom {
+    width: 100%;
+    height: 79%;
+    position: absolute;
+    bottom: 0;
+}
+
+.left-layout-elements {
+    height: 100%;
+}
+
+.screen-layout {
+    height: 60%;
+    width: 88%;
+    margin-left: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen-element {
+    height: 85%;
+    width: 85%;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    border: black solid 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.top-element {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red-light-top {
+    height: 25%;
+    aspect-ratio: 1 / 1;
+    margin: 0 2%;
+    background-color: #DE0A2C;
+    border-radius: 100px;
+    border: black solid 2px;
+}
+
+.middle-element {
+    height: 70%;
+    width: 80%;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 10px;
+}
+.bottom-element {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+}
+.red-light-bottom {
+    height: 40%;
+    aspect-ratio: 1 / 1;
+    margin: 0 2%;
+    background-color: #DE0A2C;
+    border-radius: 100px;
+    border: black solid 2px;
+}
+
+.lines-layout-bottom {
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    hr {
+        width: 100%;
+        margin: 3% 0;
+        border: 0; 
+        border-top: 1px solid rgb(0, 0, 0);
+    }
+}
+
+.control-layout {
+    height: 40%;
+    width: 90%;
+}
+
+.control-top-layout {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.round-black {
+    height: 80%;
+    aspect-ratio: 1 / 1;
+    margin: 0 2%;
+    background-color: black;
+    border-radius: 100px;
+    border: black solid 2px;
+    margin-left: 5%;
+    margin-right: 3%;
+}
+
+.buttons-elements {
+    padding: 2% 6%;
+    border-radius: 100px;
+    border: black solid 2px;
+    margin-bottom: 10%;
+    font-size: 1vw;
+    letter-spacing: 1px;
+}
+
+.btn-search {
+    background-color: #DE0A2C;
+    color: white;
+}
+
+.btn-random {
+    background-color: #176A9F;
+    margin-left: 5%;
+    color: white;
+}
+
+.control-bottom-layout {
+    background-color: #28ABFD;
+
+}
+
+/*
+* Right SIDE
+*/
+
+.-right{
+    background-color: transparent;
+}
+
+.right-bloc {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    clip-path: polygon(0% 100%, 100% 100%, 100% 10%, 65% 10%, 53% 20%, 0% 20%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 20%, 45% 20%, 35% 10%, 0% 10%);
+}
+
+.right-layout-3 {
+    background-color: #BC1934;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(-0.5% 100.5%, 100.5% 100.5%, 100.5% 10.3%, 65% 10.3%, 53% 20.3%, -0.5% 20.3%);
+    clip-path: polygon(-0.5% 100.5%, 100.5% 100.5%, 100.5% 20.3%, 45% 20.3%, 35% 10.3%, -0.5% 10.3%);
+}
+
+.right-layout-2 {
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(1.5% 99%, 98.5% 99%, 98.5% 11%, 66% 11%, 54% 21%, 1.5% 21%);
+    clip-path: polygon(1.5% 99%, 98.5% 99%, 98.5% 21%, 44% 21%, 34% 11%, 1.5% 11%);
+}
+
+.right-layout-1 {
+    background-color: #c70828;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(2% 98.5%, 98% 98.5%, 98% 21.4%, 44% 21.32%, 34% 11.3%, 2% 11.3%)
 }
