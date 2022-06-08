@@ -21,7 +21,9 @@
                   <div class="red-light-top"></div>
                   <div class="red-light-top"></div>
                 </div>
-                <div class="middle-element"></div>
+                <div class="middle-element">
+                  <PokemonImage :pokemon="pokemon" />
+                </div>
                 <div class="bottom-element">
                   <div class="red-light-bottom"></div>
                   <div class="lines-layout-bottom">
@@ -42,18 +44,18 @@
             <div class="control-layout">
               <div class="control-top-layout">
                   <div class="round-black"></div>
-                   <button class="btn-search" type="submit">
+                   <button class="btn-search" type="submit" @click="callPokemon(pokemonSearch)">
                     <img src="../assets/pokeball.svg" alt="">
                     <p>SEARCH</p>
                   </button>
-                  <button class="btn-random">
+                  <button class="btn-random" @click="generatePokemon">
                     <img src="../assets/pokeball.svg" alt="">
                     <p>RANDOM</p>
                   </button>
               </div>
               <div class="control-bottom-layout">
                   <form action="" class="search-bar">
-                    <input type="text" value="Pikachu">
+                    <input type="text"  v-model="pokemonSearch" class="pokemon-name">
                   </form>
                   <div class="cross-layer">
                       <div class="top-cross">
@@ -97,23 +99,36 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
       return {
         url: 'https://pokeapi.co/api/v2/pokemon',
         pokemon: null,
-        lastPokemon: 'pikachu',
+        pokemonSearch: 'pikachu',
+        lastPokemon: '',
+        listPokeNames: [],
         error: false,
       }
     },
     methods: {
-      async callPokemon(lastPokemon) {
-        this.lastPokemon = lastPokemon;
+      async callPokemon(pokemonSearch) {
         try {
           this.error = false;
-          if(this.pokemon?.name !== this.lastPokemon){  
-            this.pokemon = await fetch(`${this.url}/${this.lastPokemon}`).then((data) => data.json());
-            console.log('ici')
+          if(pokemonSearch !== this.lastPokemon){  
+            this.pokemon = await fetch(`${this.url}/${pokemonSearch}`).then((data) => data.json());
+            this.lastPokemon = this.pokemonSearch;
+            this.pokemonSearch = pokemonSearch;
+            console.log('hey : ', this.pokemon)
           }
         } catch(error) {
           this.error = true;
         }
       },
+      generatePokemon() {
+        const randomR = Math.floor(Math.random() * (0 - 1126 + 1) + 1126);
+        this.pokemon = this.listPokeNames[randomR]?.name;
+        this.callPokemon(this.pokemon);
+      },
+    },
+    async mounted() {
+      let data = await fetch(`${this.url}/?offset=20&limit=1126`).then((data) => data.json())
+      this.listPokeNames = data.results;
+      this.callPokemon(this.pokemonSearch);
     },
   }
 </script>
