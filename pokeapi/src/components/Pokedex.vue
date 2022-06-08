@@ -42,8 +42,32 @@
             <div class="control-layout">
               <div class="control-top-layout">
                   <div class="round-black"></div>
-                  <button class="buttons-elements btn-search">SEARCH</button>
-                  <button class="buttons-elements btn-random">RANDOM</button>
+                   <button class="btn-search" type="submit">
+                    <img src="../assets/pokeball.svg" alt="">
+                    <p>SEARCH</p>
+                  </button>
+                  <button class="btn-random">
+                    <img src="../assets/pokeball.svg" alt="">
+                    <p>RANDOM</p>
+                  </button>
+              </div>
+              <div class="control-bottom-layout">
+                  <form action="" class="search-bar">
+                    <input type="text" value="Pikachu">
+                  </form>
+                  <div class="cross-layer">
+                      <div class="top-cross">
+                        <div class="cross cross-vertical"></div>
+                      </div>
+                      <div class="middle-cross">
+                        <div class="cross cross-left"></div>
+                        <div class="cross-middle-horizontal"></div>
+                        <div class="cross cross-right"></div>
+                      </div>
+                      <div class="bottom-cross">
+                        <div class="cross cross-vertical"></div>
+                      </div>
+                  </div>
               </div>
             </div>
         </div>
