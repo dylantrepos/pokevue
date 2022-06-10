@@ -77,11 +77,33 @@
       </div>
       
     </div>
+  </div>
+  <div class="container -cover_left">
+    <div class="aside -left">
+      <div class="left-layout-4"></div>
+      <div class="left-layout-3"></div>
+      <div class="left-layout-2"></div>
+      <div class="left-layout-1"></div>
+    </div>
     <div class="aside -right">
+
+    </div>
+  </div>
+  <div class="container -cover_right">
+    <div class="aside -left">
+
+    </div>
+  <div class="aside -right">
       <div class="right-bloc">
         <div class="right-layout-3"></div>
         <div class="right-layout-2"></div>
-        <div class="right-layout-1"></div>
+        <div class="right-layout-1">
+        </div>
+        <div class="left-bloc-bottom">
+        <div class="left-layout-elements">
+          <button>click</button>
+        </div>
+      </div>
       </div>
     </div>
   </div>
