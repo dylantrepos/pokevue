@@ -20,6 +20,9 @@
     data() {
         return {
             pokemonImage: null,
+            myInterval: null,
+            test: null,
+            test2: null,
         }
     },
     methods: {
@@ -27,20 +30,61 @@
         if(this.pokemonImage && this.pokemonImage.back_default) {
           this.$refs.imgFront?.classList.toggle('anim-img-enter');
           this.$refs.imgBack?.classList.toggle('anim-img-enter');
+          // this.test = null;
+          // this.test2 = null;
+          console.log(document.getAnimations())
+          // this.test = this.$refs.imgFront?.animate([
+          //   { transform: 'rotateY(-90deg)'},
+          //   { transform: 'rotateY(90deg)'},
+          // ],
+          // {
+          //   duration: 3000,
+          //   iterations: 1,
+          //   }
+          // )
+          // this.test2 = this.$refs.imgBack?.animate([
+          //   { transform: 'rotateY(-90deg)'},
+          //   { transform: 'rotateY(90deg)'},
+          // ],
+          // {
+          //   duration: 3000,
+          //   iterations: 1,
+          //   }
+          // )
         } 
       },
       async initFirstImage() {
-        this.$refs.imgBack?.classList.remove('anim-img-enter');
-        this.$refs.imgFront?.classList.add('anim-img-enter');
+        this.$refs.imgBack?.classList.add('anim-img-enter');
+        this.$refs.imgFront?.classList.remove('anim-img-enter');
       }
     },
     mounted() {    
-        setInterval(this.animationImg, 3000);
+      // this.test = this.$refs.imgFront?.animate([
+      //       { transform: 'rotateY(-90deg)'},
+      //       { transform: 'rotateY(90deg)'},
+      //     ],
+      //     {
+      //       duration: 3000,
+      //       iterations: 1,
+      //       }
+      //     )
+      //     this.test2 = this.$refs.imgBack?.animate([
+      //       { transform: 'rotateY(-90deg)'},
+      //       { transform: 'rotateY(90deg)'},
+      //     ],
+      //     {
+      //       duration: 3000,
+      //       iterations: 1,
+      //       }
+      //     )
     },
     watch: { 
       	pokemon: async function() { 
           this.pokemonImage = await this.pokemon?.sprites;
           this.initFirstImage()
+           this.myInterval ? clearInterval(this.myInterval) : ''
+           this.animationImg();
+           this.myInterval = setInterval(this.animationImg, 3000)
         }
     },
   }

@@ -10,11 +10,11 @@
 .img-result {
     position: absolute;
     display: none;
-    width: 80%;
+    height: 90%;
 }
 
 .anim-img-enter {
-    animation: rotateAnim 3s linear infinite;
+    animation: rotateAnim 3s linear forwards;
     display: block!important;
 }
 

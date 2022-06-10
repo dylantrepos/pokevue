@@ -54,7 +54,7 @@
                   </button>
               </div>
               <div class="control-bottom-layout">
-                  <form action="" class="search-bar">
+                  <form @submit.prevent="callPokemon(pokemonSearch)" class="search-bar">
                     <input type="text"  v-model="pokemonSearch" class="pokemon-name">
                   </form>
                   <div class="cross-layer">
@@ -99,9 +99,21 @@
         <div class="right-layout-2"></div>
         <div class="right-layout-1">
         </div>
-        <div class="left-bloc-bottom">
-        <div class="left-layout-elements">
-          <button>click</button>
+        <div class="right-bloc-bottom">
+        <div class="right-layout-elements">
+          <div class="right-layout-top">
+            <div class="right-layout-top-box">
+              <div class="screen-general">
+                <div v-if="pokemon?.types">
+                  <h1 class="pokemon-name">{{ pokemon?.name }}</h1>
+                  <h5>Type : {{pokemon?.types[0].type.name}}</h5>
+                </div>
+              </div>
+              <div class="screen-general2"></div>
+            </div>
+          </div>
+          <div class="right-layout-middle"></div>
+          <div class="right-layout-bottom"></div>
         </div>
       </div>
       </div>
@@ -128,15 +140,15 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
       }
     },
     methods: {
-      async callPokemon(pokemonSearch) {
+      async callPokemon(pokemonSearch = this.pokemonSearch) {
         try {
           this.error = false;
           if(pokemonSearch !== this.lastPokemon){  
             this.pokemon = await fetch(`${this.url}/${pokemonSearch}`).then((data) => data.json());
             this.lastPokemon = this.pokemonSearch;
             this.pokemonSearch = pokemonSearch;
-            console.log('hey : ', this.pokemon)
           }
+
         } catch(error) {
           this.error = true;
         }
@@ -146,6 +158,10 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
         this.pokemon = this.listPokeNames[randomR]?.name;
         this.callPokemon(this.pokemon);
       },
+      test()
+      {
+        console.log('este')
+      }
     },
     async mounted() {
       let data = await fetch(`${this.url}/?offset=20&limit=1126`).then((data) => data.json())
