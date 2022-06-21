@@ -104,9 +104,15 @@
           <div class="right-layout-top">
             <div class="right-layout-top-box">
               <div class="screen-general">
-                <div v-if="pokemon?.types">
+                <div v-if="pokemon?.types" class="info_general">
                   <h1 class="pokemon-name">{{ pokemon?.name }}</h1>
-                  <h5>Type : {{pokemon?.types[0].type.name}}</h5>
+                  <h5 class="pokemon-type">Type : {{pokemon?.types[0].type.name}}</h5>
+                  <div class="stats_container">
+                    <div v-for="stats in pokemon?.stats" :key="stats.stat.name" class="stats_item">
+                      <span>{{stats.stat.name}}</span>
+                      <span>{{stats.base_stat}}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="screen-general2"></div>
@@ -147,6 +153,7 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
             this.pokemon = await fetch(`${this.url}/${pokemonSearch}`).then((data) => data.json());
             this.lastPokemon = this.pokemonSearch;
             this.pokemonSearch = pokemonSearch;
+            console.log(this.pokemon)
           }
 
         } catch(error) {
