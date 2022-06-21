@@ -22,6 +22,14 @@
                   <div class="red-light-top"></div>
                 </div>
                 <div class="middle-element">
+                  <div class="loading-container">
+                    <div class="lds-ellipsis" v-if="isLoading">
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                    </div>
+                  </div>
                   <PokemonImage :pokemon="pokemon" />
                 </div>
                 <div class="bottom-element">
@@ -103,23 +111,75 @@
         <div class="right-layout-elements">
           <div class="right-layout-top">
             <div class="right-layout-top-box">
+              <div class="loading-container">
+                    <div class="lds-ellipsis" v-if="isLoading">
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                    </div>
+                  </div>
               <div class="screen-general">
                 <div v-if="pokemon?.types" class="info_general">
                   <h1 class="pokemon-name">{{ pokemon?.name }}</h1>
                   <h5 class="pokemon-type">Type : {{pokemon?.types[0].type.name}}</h5>
-                  <div class="stats_container">
-                    <div v-for="stats in pokemon?.stats" :key="stats.stat.name" class="stats_item">
-                      <span>{{stats.stat.name}}</span>
-                      <span>{{stats.base_stat}}</span>
-                    </div>
-                  </div>
+                  <p class="pokemon-description">
+                    {{ pokemon?.description?.flavor_text?.toLowerCase() ?? 'No description available for this pokemon...' }}
+                  </p>
                 </div>
               </div>
               <div class="screen-general2"></div>
             </div>
           </div>
-          <div class="right-layout-middle"></div>
-          <div class="right-layout-bottom"></div>
+          <div class="right-layout-middle">
+            <div class="control-btn control-btn-general">
+              <img src="../assets/pokeball.svg" alt="">
+                <p>Stats</p>
+              </div>
+            <div class="control-btn control-btn-general">
+              <img src="../assets/pokeball.svg" alt="">
+                <p>Evolutions</p>
+              </div>
+            <div class="control-btn control-btn-general">
+              <img src="../assets/pokeball.svg" alt="">
+                <p>Other</p>
+              </div>
+            <div class="control-btn control-btn-general">
+              <img src="../assets/pokeball.svg" alt="">
+                <p>Other</p>
+              </div>
+            <div class="control-btn control-btn-general">
+              <img src="../assets/pokeball.svg" alt="">
+                <p>Other</p>
+              </div>
+            <div class="control-btn control-btn-general">
+              <img src="../assets/pokeball.svg" alt="">
+                <p>Other</p>
+              </div>
+          </div>
+          <div class="right-layout-bottom">
+            <div class="right-layout-top-box">
+              <div class="loading-container">
+                    <div class="lds-ellipsis" v-if="isLoading">
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                      <div><img src="../assets/pokeball.svg" alt=""></div>
+                    </div>
+                  </div>
+              <div class="screen-general">
+                  <div v-if="pokemon?.types" class="info_general">
+                    <div class="stats_container">
+                      <div v-for="stats in pokemon?.stats" :key="stats.stat.name" class="stats_item">
+                        <span>{{stats.stat.name}}</span>
+                        <span>{{stats.base_stat}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="screen-general2"></div>
+            </div>
+          </div>
         </div>
       </div>
       </div>
@@ -143,14 +203,29 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
         lastPokemon: '',
         listPokeNames: [],
         error: false,
+        isLoading: true,
       }
     },
     methods: {
       async callPokemon(pokemonSearch = this.pokemonSearch) {
+        this.isLoading = true;
         try {
           this.error = false;
           if(pokemonSearch !== this.lastPokemon){  
-            this.pokemon = await fetch(`${this.url}/${pokemonSearch}`).then((data) => data.json());
+            this.pokemon = await fetch(`${this.url}/${pokemonSearch}`).then(async(data) =>{
+              const poke = await data.json();
+              let evol = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${poke.id}/`)
+                .then(async (data) => {
+                  let description = await data.json()
+                  description = description.flavor_text_entries.filter((evo) => evo.language.name === 'en')[0]
+                  console.log(description)
+                  return description;
+                  })
+                .catch(err => 'No description')
+              console.log(evol)
+              this.isLoading = false;
+              return { ...poke, description: {...evol}}
+              });
             this.lastPokemon = this.pokemonSearch;
             this.pokemonSearch = pokemonSearch;
             console.log(this.pokemon)
