@@ -26,10 +26,9 @@ import PokemonEvolutionImage from './PokemonEvolutionImage/PokemonEvolutionImage
     },
     methods: {
       async callPokemon() {
-        try {
-            this.error = false;
-            this.pokemonEvolutionLink = await fetch(this.pokemon?.species.url).then((data) => (data.json()))
-            this.pokemonEvolutionData = await fetch(this.pokemonEvolutionLink.evolution_chain.url).then((data) => (data.json()))
+
+            this.pokemonEvolutionLink = await fetch(this.pokemon?.species?.url).then((data) => (data.json()))
+            this.pokemonEvolutionData = await fetch(this.pokemonEvolutionLink?.evolution_chain?.url).then((data) => (data.json()))
             let path = this.pokemonEvolutionData.chain;
             this.pokemonEvolutions = [];
             this.pokemonEvolutions.push(fetch(`${this.url}/${path.species.name}`).then((data) => data.json()))
@@ -42,10 +41,8 @@ import PokemonEvolutionImage from './PokemonEvolutionImage/PokemonEvolutionImage
             } 
 
             this.pokemonEvolutions = await Promise.all(this.pokemonEvolutions)
-            this.pokemonEvolutions = this.pokemonEvolutions.filter((pokemonEvo) => pokemonEvo.name !== this.pokemon.name)
-        } catch(error) {
-          this.error = true;
-        }
+            this.pokemonEvolutions = await this.pokemonEvolutions.filter((pokemonEvo) => pokemonEvo.name !== this.pokemon.name)
+            this.$emit('loading-state', false);
       },
     },
     mounted() {

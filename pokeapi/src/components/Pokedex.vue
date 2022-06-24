@@ -22,7 +22,7 @@
                   <div class="red-light-top"></div>
                 </div>
                 <div class="middle-element">
-                  <div class="loading-container">
+                  <div class="loading-container" v-if="isLoading">
                     <div class="lds-ellipsis" v-if="isLoading">
                       <div><img src="../assets/pokeball.svg" alt=""></div>
                       <div><img src="../assets/pokeball.svg" alt=""></div>
@@ -111,7 +111,7 @@
         <div class="right-layout-elements">
           <div class="right-layout-top">
             <div class="right-layout-top-box">
-              <div class="loading-container">
+              <div class="loading-container" v-if="isLoading">
                     <div class="lds-ellipsis" v-if="isLoading">
                       <div><img src="../assets/pokeball.svg" alt=""></div>
                       <div><img src="../assets/pokeball.svg" alt=""></div>
@@ -159,8 +159,8 @@
           </div>
           <div class="right-layout-bottom">
             <div class="right-layout-top-box">
-              <div class="loading-container">
-                    <div class="lds-ellipsis" v-if="isLoading">
+              <div class="loading-container" v-if="isLoading">
+                    <div class="lds-ellipsis" >
                       <div><img src="../assets/pokeball.svg" alt=""></div>
                       <div><img src="../assets/pokeball.svg" alt=""></div>
                       <div><img src="../assets/pokeball.svg" alt=""></div>
@@ -178,7 +178,7 @@
                   </div>
                 </div>
               <div class="screen-general screen-general-2" v-show="tabs == 1">
-                  <PokemonEvolutions :pokemon="pokemon" @change-pokemon="switchFromEvol"/>
+                  <PokemonEvolutions :pokemon="pokemon" @change-pokemon="switchFromEvol" @loading-state="loadingOver"/>
               </div>
             </div>
           </div>
@@ -212,7 +212,7 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
     methods: {
       async callPokemon(pokemonSearch = this.pokemonSearch) {
         this.isLoading = true;
-        try {
+
           this.error = false;
           if(pokemonSearch !== this.lastPokemon){  
             this.pokemon = await fetch(`${this.url}/${pokemonSearch}`).then(async(data) =>{
@@ -226,7 +226,7 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
                   })
                 .catch(err => 'No description')
               console.log(evol)
-              this.isLoading = false;
+              // this.isLoading = false;
               return { ...poke, description: {...evol}}
               });
             this.lastPokemon = this.pokemonSearch;
@@ -234,9 +234,6 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
             console.log(this.pokemon)
           }
 
-        } catch(error) {
-          this.error = true;
-        }
       },
       generatePokemon() {
         const randomR = Math.floor(Math.random() * (0 - 1126 + 1) + 1126);
@@ -250,6 +247,9 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
       },
       showTab(numTab) {
         this.tabs = numTab;
+      },
+      loadingOver() {
+        this.isLoading = false
       }
     },
     async mounted() {

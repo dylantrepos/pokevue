@@ -63,7 +63,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 99;
     pointer-events: none;
 
     .lds-ellipsis {
