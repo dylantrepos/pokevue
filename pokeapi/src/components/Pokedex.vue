@@ -132,11 +132,11 @@
             </div>
           </div>
           <div class="right-layout-middle">
-            <div class="control-btn control-btn-general">
-              <img src="../assets/pokeball.svg" alt="">
+            <div class="control-btn control-btn-general" @click="showTab(0)">
+              <img src="../assets/pokeball.svg" alt="" >
                 <p>Stats</p>
               </div>
-            <div class="control-btn control-btn-general">
+            <div class="control-btn control-btn-general" @click="showTab(1)">
               <img src="../assets/pokeball.svg" alt="">
                 <p>Evolutions</p>
               </div>
@@ -167,17 +167,19 @@
                       <div><img src="../assets/pokeball.svg" alt=""></div>
                     </div>
                   </div>
-              <div class="screen-general">
+              <div class="screen-general screen-general-1" v-show="tabs == 0">
                   <div v-if="pokemon?.types" class="info_general">
                     <div class="stats_container">
                       <div v-for="stats in pokemon?.stats" :key="stats.stat.name" class="stats_item">
-                        <span>{{stats.stat.name}}</span>
+                        <span class="stats_item-name">{{stats.stat.name}}</span>
                         <span>{{stats.base_stat}}</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              <div class="screen-general2"></div>
+              <div class="screen-general screen-general-2" v-show="tabs == 1">
+                  <PokemonEvolutions :pokemon="pokemon" @change-pokemon="switchFromEvol"/>
+              </div>
             </div>
           </div>
         </div>
@@ -204,6 +206,7 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
         listPokeNames: [],
         error: false,
         isLoading: true,
+        tabs: 0,
       }
     },
     methods: {
@@ -240,9 +243,13 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
         this.pokemon = this.listPokeNames[randomR]?.name;
         this.callPokemon(this.pokemon);
       },
-      test()
+      switchFromEvol(pokeEvol)
       {
-        console.log('este')
+        this.pokemonSearch = pokeEvol;
+        this.callPokemon();
+      },
+      showTab(numTab) {
+        this.tabs = numTab;
       }
     },
     async mounted() {

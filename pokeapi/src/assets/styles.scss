@@ -17,13 +17,41 @@
     align-items: center;
 
     h1 {
-        font-size: 3vw;
+        font-size: .8rem;
         color: #42b983;
     }
-
+    
     h5 {
-        font-size: 1.3vw;
+        font-size: .8rem;
     }
+    
+    p, span {
+        display: block;
+        font-size: .7rem;
+    }
+    @media screen and (min-width: 700px) {
+        p, span{
+            font-size: .9rem;
+        }
+        h1{
+            font-size: 1.3rem;
+        }
+        h5{
+            font-size: .8rem;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+        p, span{
+            font-size: 1rem;
+        }
+        h1{
+            font-size: 1.5rem;
+        }
+        h5{
+            font-size: 1rem;
+        }
+    }
+
   }
 
                         
@@ -36,6 +64,7 @@
     justify-content: center;
     align-items: center;
     z-index: 2;
+    pointer-events: none;
 
     .lds-ellipsis {
         display: inline-block;
@@ -426,7 +455,7 @@
                         animation: pokeballAnimation 1s ease;
                     }
                     p {
-                        display: none;
+                        display: none !important;
                     }
             
                     &::before {
@@ -724,39 +753,61 @@
                             background-color: white;
                             border: black solid 2px;
                             border-radius: 10px;
+                            padding: 10px;
 
-                            .info_general {
+                            &-1 {
+                                .info_general {
 
-                                height: 100%;
-
-                                .pokemon-name {
-                                    height: 30%;
-                                }
-
-                                .pokemon-type {
-                                    height: 15%;
-                                }
-
-                                .pokemon-description {
-                                    margin: 5%;
-
-                                    &::first-letter {
-                                        text-transform: capitalize;
+                                    height: 100%;
+    
+                                    .pokemon-name {
+                                        height: 20%;
+                                    }
+    
+                                    .pokemon-type {
+                                        height: auto;
+                                        font-size: .7rem;
+                                    }
+    
+                                    .pokemon-description {
+                                        margin:  2px 10px 10px 10px;
+                                        font-size: .8rem;
+    
+                                        @media screen and (max-width: 700px) {
+                                            font-size: .6rem;
+                                        }
+    
+                                        @media screen and (min-width: 1200px) {
+                                            font-size: 1rem;
+                                        }
+    
+                                        &::first-letter {
+                                            text-transform: capitalize;
+                                        }
+                                    }
+    
+                                    .stats_container {
+                                        display: grid;
+                                        grid-template-columns: repeat(3, 1fr);
+                                        font-size: 1.2vw;
+                                        height: 55%;
+    
+                                        .stats_item {
+                                            margin-top: 2%;
+                                            display: flex;
+                                            flex-direction: column;
+                                        }
+                                        .stats_item-name {
+                                            font-size: 2.5vw!important;
+                                        }
                                     }
                                 }
+                            }
 
-                                .stats_container {
-                                    display: grid;
-                                    grid-template-columns: repeat(3, 1fr);
-                                    font-size: 1.2vw;
-                                    height: 55%;
-
-                                    .stats_item {
-                                        margin-top: 2%;
-                                        display: flex;
-                                        flex-direction: column;
-                                    }
-                                }
+                            &-2 {
+                                display: flex;
+                                justify-content: center;
+                                background-color: blue;
                             }
                         }
                     }
@@ -784,7 +835,17 @@
 
                         p {
                             display: block;
+                            font-size: .8rem;
+
+                            @media screen and (max-width: 800px) {
+                                font-size: .6rem;
+                            }
+                            @media screen and (min-width: 1200px) {
+                                font-size: 1rem;
+                            }
                         }
+
+                    
 
                         &:hover {
                             color: red;
@@ -793,7 +854,7 @@
                                 animation: pokeballAnimation 1s ease;
                             }
                             p {
-                                display: none;
+                                display: none !important;
                             }
                             
                         }
@@ -802,7 +863,7 @@
                 }
                 .right-layout-bottom {
                     height: 35%;
-                    background-color: green;
+                    // background-color: green;
                     display: flex;
                     justify-content: center;
                     align-items: flex-start;
