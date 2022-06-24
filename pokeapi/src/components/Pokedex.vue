@@ -212,7 +212,7 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
     methods: {
       async callPokemon(pokemonSearch = this.pokemonSearch) {
         this.isLoading = true;
-
+        try {
           this.error = false;
           if(pokemonSearch !== this.lastPokemon){  
             this.pokemon = await fetch(`${this.url}/${pokemonSearch}`).then(async(data) =>{
@@ -234,6 +234,9 @@ import PokemonSearch from './pokemon/PokemonSearch/PokemonSearch.vue';
             console.log(this.pokemon)
           }
 
+        } catch(error) {
+          this.error = true;
+        }
       },
       generatePokemon() {
         const randomR = Math.floor(Math.random() * (0 - 1126 + 1) + 1126);
